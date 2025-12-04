@@ -350,9 +350,9 @@ useHead({
   
   .social-btn {
     margin: 0.25rem !important;
-    min-width: 48px !important;
-    width: 48px !important;
-    height: 48px !important;
+    min-width: 52px !important;
+    width: 52px !important;
+    height: 52px !important;
   }
   
   :deep(.q-icon[size="48px"]) {
@@ -404,6 +404,7 @@ useHead({
     width: 48px !important;
     height: 48px !important;
     margin: 0.25rem !important;
+    font-size: 1.2rem !important;
   }
   
   :deep(.row.q-gutter-md) {
@@ -417,13 +418,15 @@ useHead({
   }
   
   .social-btn {
-    min-width: 40px !important;
-    width: 40px !important;
-    height: 40px !important;
-    
-    :deep(.q-icon) {
-      font-size: 20px !important;
-    }
+    min-width: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0.2rem !important;
+    font-size: 1rem !important;
+  }
+  
+  :deep(.row.q-gutter-md) {
+    gap: 0.3rem !important;
   }
 }
 </style>

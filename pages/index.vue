@@ -23,7 +23,7 @@
       <div class="col-12 col-md-6 order-md-first order-last animate-fadeInLeft content-section flex flex-center">
         
         <!-- Hero Text -->
-        <div class="hero-text-wrapper">
+        <div class="hero-text-wrapper text-center">
           <h1 class="hero-title q-mt-none q-mb-none">
             HI, I'M <span class="text-gradient">HENRY!</span>
           </h1>
@@ -100,6 +100,8 @@ const getParticleStyle = (n) => {
 .home-page {
   padding: 20px;
   min-height: 100vh;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .hero-container {
@@ -108,11 +110,23 @@ const getParticleStyle = (n) => {
   margin: 0 auto;
   position: relative;
   z-index: 10;
+  padding: 0 20px;
+  
+  &.q-col-gutter-xl {
+    margin-left: -calc(var(--q-gutter-xl) / 2);
+    margin-right: -calc(var(--q-gutter-xl) / 2);
+  }
+  
+  @media (max-width: 1024px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 // Hero Typography
 .hero-text-wrapper {
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .hero-title {
@@ -128,6 +142,10 @@ const getParticleStyle = (n) => {
   max-width: 600px;
   line-height: 1.8;
   font-size: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
 }
 
 // Text Gradients
@@ -220,6 +238,8 @@ const getParticleStyle = (n) => {
   gap: 16px;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .cta-button {
@@ -359,25 +379,22 @@ const getParticleStyle = (n) => {
   
   .hero-container {
     justify-content: center !important;
+    margin: 0 !important;
+    
+    .col-12 {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
   }
   
   .content-section {
     width: 100%;
-    
-    .hero-text-wrapper,
-    .hero-description,
-    .button-row {
-      width: 100%;
-      text-align: center;
-    }
   }
   
   .hero-description {
     margin: 0 auto 24px;
-  }
-  
-  .button-row {
-    justify-content: center;
   }
   
   .hexagon-container {
@@ -395,15 +412,25 @@ const getParticleStyle = (n) => {
 @media (max-width: 768px) {
   .home-page {
     padding: 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .hero-container {
+    padding: 0 16px;
   }
   
   .hero-title {
     font-size: 3rem !important;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   .hero-description {
     font-size: 0.95rem;
-    max-width: 500px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hexagon-container {
@@ -438,6 +465,12 @@ const getParticleStyle = (n) => {
 @media (max-width: 600px) {
   .home-page {
     padding: 12px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .hero-container {
+    padding: 0 12px;
   }
   
   .hero-title {
@@ -476,7 +509,12 @@ const getParticleStyle = (n) => {
   }
   
   .cta-button {
-    padding: 12px 20px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .cta-outline {
+    border: 1.5px solid #00E5FF;
   }
   
   :deep(.q-icon[size="200px"]) {
@@ -491,6 +529,12 @@ const getParticleStyle = (n) => {
 @media (max-width: 480px) {
   .home-page {
     padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .hero-container {
+    padding: 0 10px;
   }
   
   .hexagon-container {
@@ -514,8 +558,12 @@ const getParticleStyle = (n) => {
   }
   
   .cta-button {
-    padding: 10px 18px !important;
-    font-size: 0.875rem;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .cta-outline {
+    border: 1px solid #00E5FF;
   }
   
   :deep(.q-icon[size="200px"]) {
@@ -530,6 +578,12 @@ const getParticleStyle = (n) => {
 @media (max-width: 360px) {
   .home-page {
     padding: 8px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .hero-container {
+    padding: 0 8px;
   }
   
   .hexagon-container {
@@ -552,8 +606,12 @@ const getParticleStyle = (n) => {
   }
   
   .cta-button {
-    padding: 10px 16px !important;
-    font-size: 0.85rem;
+    padding: 8px 12px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .cta-outline {
+    border: 1px solid #00E5FF;
   }
 }
 
