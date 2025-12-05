@@ -10,7 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@quasar/extras": "^1.17.0",
+    "firebase": "^12.6.0",
     "nuxt": "^4.2.1",
     "nuxt-quasar-ui": "^3.0.0",
     "quasar": "^2.18.6",

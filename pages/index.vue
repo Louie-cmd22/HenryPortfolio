@@ -13,7 +13,7 @@
         <div class="hexagon-container">
           <div class="hexagon-frame">
             <div class="hexagon-inner">
-              <img src="~/assets/Portprofile.png" alt="Henry's Avatar">
+              <img src="/Portprofile.png" alt="Henry's Profile Picture" />
             </div>
           </div>
         </div>

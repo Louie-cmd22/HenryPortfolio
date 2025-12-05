@@ -34,7 +34,10 @@
                 label="Your Email"
                 type="email"
                 lazy-rules
-                :rules="[ val => val && val.length > 0 || 'Please enter your email']"
+                :rules="[
+                  val => val && val.length > 0 || 'Please enter your email',
+                  val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Please enter a valid email address'
+                ]"
                 color="primary"
                 class="custom-input"
               >
@@ -69,6 +72,8 @@
                   icon-right="send" 
                   class="q-px-xl"
                   size="lg"
+                  :loading="loading"
+                  :disable="loading"
                 />
               </div>
             </q-form>
@@ -161,26 +166,51 @@
 <script setup>
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
+import { useContactForm } from '~/composables/useContactForm'
+import { useEmailJS } from '~/composables/useEmailJS'
 
 const $q = useQuasar()
+const {submitContact, loading, error, success} = useContactForm()
+const {sendEmail} = useEmailJS()
 
-const name = ref(null)
-const email = ref(null)
-const message = ref(null)
+const name = ref('')
+const email = ref('')
+const message = ref('')
 
-function onSubmit () {
-  $q.notify({
-    color: 'positive',
-    textColor: 'white',
-    icon: 'check_circle',
-    message: 'Message sent successfully! I\'ll get back to you soon.',
-    position: 'top'
-  })
-  
-  // Reset form
-  name.value = null
-  email.value = null
-  message.value = null
+const onSubmit = async () => {
+  try{ 
+    const [firebaseResult, emailResult] = await Promise.allSettled([
+      submitContact(name.value, email.value, message.value),
+      sendEmail(name.value, email.value, message.value)
+    ]);
+
+    // Show success notification
+    $q.notify({
+      color: 'primary',
+      textColor: 'dark',
+      icon: 'check_circle',
+      message: 'Message sent successfully! I\'ll get back to you soon.',
+      position: 'top',
+      timeout: 3000,
+      classes: 'notification-success'
+    })
+
+    // Reset form
+    name.value = ''
+    email.value = ''
+    message.value = ''
+  } catch (err) {
+      // Show error notification
+      $q.notify({
+        color: 'secondary',
+        textColor: 'white',
+        icon: 'error',
+        message: error.value || 'Failed to send message. Please try again.',
+        position: 'top',
+        timeout: 4000,
+        classes: 'notification-error'
+      })
+  }
 }
 
 useHead({
@@ -195,8 +225,6 @@ useHead({
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-.custom-input {
   :deep(.q-field__control) {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -217,7 +245,7 @@ useHead({
   :deep(.q-field__label) {
     color: rgba(255, 255, 255, 0.7);
   }
-}
+
 
 .social-buttons-container {
   flex-wrap: wrap;
@@ -429,4 +457,50 @@ useHead({
     gap: 0.3rem !important;
   }
 }
+
+// Notification Styling
+:deep(.notification-success) {
+  .q-notification__content {
+    background: linear-gradient(135deg, #00E5FF 0%, #7C4DFF 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 229, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 229, 255, 0.5);
+    padding: 16px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .q-notification__icon {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+}
+
+:deep(.notification-error) {
+  .q-notification__content {
+    background: linear-gradient(135deg, #FF4081 0%, #7C4DFF 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(255, 64, 129, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 64, 129, 0.5);
+    padding: 16px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .q-notification__icon {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+}
+
+// Center notification positioning
+:deep(.q-notif__anchor--top) {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
+}
+
 </style>
