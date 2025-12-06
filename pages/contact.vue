@@ -374,6 +374,8 @@ useHead({
   // Only apply full width to form submit button, not social buttons
   :deep(.q-btn:not(.social-btn)) {
     width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9rem !important;
   }
   
   .social-btn {
@@ -403,6 +405,11 @@ useHead({
   
   :deep(.text-h6) {
     font-size: 1rem;
+  }
+  
+  :deep(.q-btn:not(.social-btn)) {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.85rem !important;
   }
   
   .custom-input {
